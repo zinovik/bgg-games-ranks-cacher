@@ -3,7 +3,7 @@ import { StorageService } from './Storage.interface';
 import { Data } from '../common/model/Data.interface';
 
 const BUCKET_NAME = 'boardgamegeek';
-const FILE_NAME = 'top1000.json';
+const FILE_NAME = 'bgg-games-ranks-top1000-latest.json';
 
 export class GoogleStorageService implements StorageService {
     private readonly storage: Storage = new Storage();

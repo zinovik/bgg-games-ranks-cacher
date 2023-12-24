@@ -11,11 +11,9 @@ functions.http('main', async (_req, res) => {
         new GoogleStorageService()
     );
 
-    try {
-        await main.sendMessage();
-    } catch (error) {
-        console.error('Unexpected error occurred: ', (error as Error).message);
-    }
+    await main.sendMessage();
+
+    console.log('Done!');
 
     res.status(200).json({
         result: 'success',

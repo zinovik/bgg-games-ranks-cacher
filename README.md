@@ -1,6 +1,6 @@
 # bgg-games-ranks-cacher
 
-bucket setup:
+bucket and scheduler setup:
 
 ```bash
 gcloud storage buckets create gs://boardgamegeek --location=us-central1

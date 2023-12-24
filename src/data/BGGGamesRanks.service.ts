@@ -1,13 +1,25 @@
-import axios from 'axios';
+import { GoogleAuth, IdTokenClient } from 'google-auth-library';
 import { DataService } from './DataService.interface';
 import { Data } from '../common/model/Data.interface';
 
 const URL =
-    'https://us-central1-zinovik-project.cloudfunctions.net/bgg-games-ranks-parser?amount=1000';
+    'https://us-central1-zinovik-project.cloudfunctions.net/bgg-games-ranks-parser';
 
 export class BGGGamesRanksService implements DataService {
+    private client: Promise<IdTokenClient>;
+
+    constructor() {
+        const auth = new GoogleAuth();
+        this.client = auth.getIdTokenClient(URL);
+    }
+
     async getData(): Promise<Data> {
-        const { data } = await axios.get(URL);
+        const { data }: { data: Data } = await (
+            await this.client
+        ).request<Data>({
+            url: `${URL}?amount=1000`,
+            method: 'GET',
+        });
 
         return data;
     }
