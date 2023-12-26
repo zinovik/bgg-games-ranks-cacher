@@ -8,7 +8,7 @@ resource "google_service_account" "github-actions" {
 }
 
 resource "google_storage_bucket" "static" {
-    name          = "boardgamegeek2"
+    name          = "boardgamegeek"
     location      = "us-central1"
 
     cors {
