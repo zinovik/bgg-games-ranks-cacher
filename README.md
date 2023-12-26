@@ -8,6 +8,7 @@
 gcloud storage buckets create gs://boardgamegeek --location=us-central1
 gcloud storage buckets update gs://boardgamegeek --cors-file=cors_file.json
 gcloud storage buckets describe gs://boardgamegeek --format="default(cors_config)"
+gcloud storage buckets update gs://boardgamegeek --versioning
 ```
 
 ### create scheduler
