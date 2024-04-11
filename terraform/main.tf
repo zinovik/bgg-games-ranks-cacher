@@ -1,6 +1,6 @@
 provider "google" {
     project = "zinovik-project"
-    region  = "us-central1"
+    region  = "europe-central2"
 }
 
 resource "google_service_account" "github-actions" {
@@ -9,7 +9,7 @@ resource "google_service_account" "github-actions" {
 
 resource "google_storage_bucket" "static" {
     name          = "boardgamegeek"
-    location      = "us-central1"
+    location      = "europe-central2"
 
     cors {
         origin          = ["https://zinovik.github.io", "http://localhost:3000"]

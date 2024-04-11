@@ -6,7 +6,7 @@ import { GoogleStorageService } from './storage/GoogleStorage.service';
 const BUCKET_NAME = 'boardgamegeek';
 const FILE_NAME = 'bgg-games-ranks-top1000-latest.json';
 const PARSER_URL =
-    'https://us-central1-zinovik-project.cloudfunctions.net/bgg-games-ranks-parser';
+    'https://europe-central2-zinovik-project.cloudfunctions.net/bgg-games-ranks-parser';
 
 functions.http('main', async (_req, res) => {
     console.log('Triggered!');
