@@ -14,7 +14,7 @@ gcloud storage buckets update gs://boardgamegeek --versioning
 ### create scheduler
 
 ```bash
-gcloud scheduler jobs create http bgg-games-ranks-cacher --location=europe-central2 --schedule="0 4 * * *" --uri="https://europe-central2-zinovik-project.cloudfunctions.net/bgg-games-ranks-cacher" --oidc-service-account-email=zinovik-project@appspot.gserviceaccount.com --http-method=get
+gcloud scheduler jobs create http bgg-games-ranks-cacher --location=europe-central2 --schedule="0 8 * * 5" --uri="https://europe-central2-zinovik-project.cloudfunctions.net/bgg-games-ranks-cacher" --oidc-service-account-email=zinovik-project@appspot.gserviceaccount.com --http-method=get
 ```
 
 ### create service account
