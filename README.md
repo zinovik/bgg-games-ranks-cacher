@@ -1,5 +1,7 @@
 # bgg-games-ranks-cacher
 
+https://europe-central2-boardgamegeek-bots.cloudfunctions.net/bgg-games-ranks-cacher
+
 ## google cloud setup
 
 ### create bucket, setup cors, check the bucket's cors:
@@ -14,37 +16,37 @@ gcloud storage buckets update gs://boardgamegeek --versioning
 ### create scheduler
 
 ```bash
-gcloud scheduler jobs create http bgg-games-ranks-cacher --location=europe-central2 --schedule="0 0 1 * *" --uri="https://europe-central2-zinovik-project.cloudfunctions.net/bgg-games-ranks-cacher" --oidc-service-account-email=bgg-games-ranks-cacher@zinovik-project.iam.gserviceaccount.com --http-method=get
+gcloud scheduler jobs create http bgg-games-ranks-cacher --location=europe-central2 --schedule="0 0 1 * *" --uri="https://europe-central2-boardgamegeek-bots.cloudfunctions.net/bgg-games-ranks-cacher" --oidc-service-account-email=bgg-games-ranks-cacher@boardgamegeek-bots.iam.gserviceaccount.com --http-method=get
 ```
 
 ### create service account
 
 ```bash
-gcloud iam service-accounts create github-actions
+gcloud iam service-accounts create github
 gcloud iam service-accounts create bgg-games-ranks-cacher
 ```
 
 ### add roles (`Service Account User` and `Cloud Functions Admin`) to the service account you want to use to deploy the function
 
 ```
-gcloud projects add-iam-policy-binding zinovik-project --member="serviceAccount:github-actions@zinovik-project.iam.gserviceaccount.com" --role="roles/cloudfunctions.admin"
+gcloud projects add-iam-policy-binding boardgamegeek-bots --member="serviceAccount:github@boardgamegeek-bots.iam.gserviceaccount.com" --role="roles/cloudfunctions.admin"
 
-gcloud projects add-iam-policy-binding zinovik-project --member="serviceAccount:github-actions@zinovik-project.iam.gserviceaccount.com" --role="roles/iam.serviceAccountUser"
+gcloud projects add-iam-policy-binding boardgamegeek-bots --member="serviceAccount:github@boardgamegeek-bots.iam.gserviceaccount.com" --role="roles/iam.serviceAccountUser"
 ```
 
-### creating keys for service account for github-actions `GOOGLE_CLOUD_SERVICE_ACCOUNT_KEY_FILE`
+### creating keys for service account for github `GOOGLE_CLOUD_SERVICE_ACCOUNT_KEY_FILE`
 
 ```bash
-gcloud iam service-accounts keys create key-file.json --iam-account=github-actions@appspot.gserviceaccount.com
+gcloud iam service-accounts keys create key-file.json --iam-account=github@appspot.gserviceaccount.com
 cat key-file.json | base64
 ```
 
 ### add access to secrets and buckets
 
 ```bash
-gcloud storage buckets add-iam-policy-binding gs://boardgamegeek --member="serviceAccount:bgg-games-ranks-cacher@zinovik-project.iam.gserviceaccount.com" --role="roles/storage.admin"
+gcloud storage buckets add-iam-policy-binding gs://boardgamegeek --member="serviceAccount:bgg-games-ranks-cacher@boardgamegeek-bots.iam.gserviceaccount.com" --role="roles/storage.admin"
 
-gcloud projects add-iam-policy-binding zinovik-project --member="serviceAccount:bgg-games-ranks-cacher@zinovik-project.iam.gserviceaccount.com" --role="roles/run.invoker"
+gcloud projects add-iam-policy-binding boardgamegeek-bots --member="serviceAccount:bgg-games-ranks-cacher@boardgamegeek-bots.iam.gserviceaccount.com" --role="roles/run.invoker"
 
-gcloud projects add-iam-policy-binding zinovik-project --member="serviceAccount:bgg-games-ranks-cacher@zinovik-project.iam.gserviceaccount.com" --role="roles/cloudfunctions.invoker"
+gcloud projects add-iam-policy-binding boardgamegeek-bots --member="serviceAccount:bgg-games-ranks-cacher@boardgamegeek-bots.iam.gserviceaccount.com" --role="roles/cloudfunctions.invoker"
 ```
